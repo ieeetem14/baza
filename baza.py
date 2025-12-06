@@ -49,7 +49,7 @@ st.dataframe(df_kat)
 st.header("➕ Dodaj produkt")
 
 nazwa_prod = st.text_input("Nazwa produktu:")
-ilosc = st.number_input("Ilość:", min_value=0, step=1)
+liczba = st.number_input("Liczba:", min_value=0, step=1)
 cena = st.number_input("Cena:", min_value=0.0, step=0.10)
 
 # słownik: nazwa kategorii → id
@@ -62,7 +62,7 @@ if st.button("Dodaj produkt"):
     else:
         supabase.table("produkty").insert({
             "nazwa": nazwa_prod,
-            "ilosc": ilosc,
+            "liczba": liczba,
             "cena": cena,
             "kategoria_id": lista_kategorii[wybor_kat]
         }).execute()
@@ -91,8 +91,8 @@ if not df_kat.empty and not df_prod.empty:
         suffixes=("_prod", "_kat")
     )
 
-    df_join = df_join[["nazwa_prod", "ilosc", "cena", "nazwa_kat"]]
-    df_join.columns = ["Produkt", "Ilość", "Cena", "Kategoria"]
+    df_join = df_join[["nazwa_prod", "liczba", "cena", "nazwa_kat"]]
+    df_join.columns = ["Produkt", "Liczba", "Cena", "Kategoria"]
 
     st.dataframe(df_join)
 else:
